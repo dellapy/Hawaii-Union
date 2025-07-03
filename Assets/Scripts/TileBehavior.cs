@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+[System.Obsolete]
 public class TileBehavior : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
@@ -98,6 +99,7 @@ public class TileBehavior : MonoBehaviour
     private bool NeighborsRevealedOrFound()
     {
         Vector2[] offsets = DefineNeighborOffsets();
+        Debug.Log("Checking neighbors for tile at " + transform.position);
 
         foreach (Vector2 offset in offsets)
         {
@@ -106,37 +108,44 @@ public class TileBehavior : MonoBehaviour
             if (neighbor != null)
             {
                 TileBehavior neighborTile = neighbor.GetComponent<TileBehavior>();
-                if (neighborTile != null && !neighborTile.isRevealed && !neighborTile.isFlagged)
+                if (neighborTile != null)
                 {
-                    return false; // Neighbor is neither revealed nor flagged
+                    if (!neighborTile.isRevealed && !neighborTile.isFlagged)
+                    {
+                        Debug.Log("Neighbor at " + neighborPos + " is neither revealed nor flagged.");
+                        return false; // Neighbor is neither revealed nor flagged
+                    }
+                    else
+                    {
+                        Debug.Log("Neighbor at " + neighborPos + " is " + (neighborTile.isRevealed ? "revealed" : "flagged"));
+                    }
                 }
+            }
+            else
+            {
+                Debug.Log("No neighbor found at " + neighborPos + "; treating as valid (edge case).");
             }
         }
 
-        return true; // All neighbors are either revealed or flagged
+        Debug.Log("All neighbors at " + transform.position + " are revealed or flagged.");
+        return true; // All neighbors are either revealed, flagged, or non-existent (edge of board)
     }
 
     private GameObject FindTileAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Untagged");
-        foreach (GameObject tile in tiles)
+        GameObject[] allTiles = GameObject.FindObjectsOfType<GameObject>(); // Get all GameObjects
+        foreach (GameObject tile in allTiles)
         {
-            Vector2 tilePos = new Vector2(Mathf.Round(tile.transform.position.x), Mathf.Round(tile.transform.position.y));
-            if (tilePos == pos)
+            TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
+            if (tileBehavior != null)
             {
-                Debug.Log("Found Untagged tile at " + pos);
-                return tile;
-            }
-        }
-        tiles = GameObject.FindGameObjectsWithTag("Mine");
-        foreach (GameObject tile in tiles)
-        {
-            Vector2 tilePos = new Vector2(Mathf.Round(tile.transform.position.x), Mathf.Round(tile.transform.position.y));
-            if (tilePos == pos)
-            {
-                Debug.Log("Found Mine tile at " + pos);
-                return tile;
+                Vector2 tilePos = new Vector2(Mathf.Round(tile.transform.position.x), Mathf.Round(tile.transform.position.y));
+                if (tilePos == pos)
+                {
+                    Debug.Log("Found tile at " + pos + " with tag " + tile.tag);
+                    return tile;
+                }
             }
         }
         Debug.LogWarning("No tile found at " + pos);
@@ -146,6 +155,7 @@ public class TileBehavior : MonoBehaviour
     private void UpdateNeighborMineCounts()
     {
         Vector2[] offsets = DefineNeighborOffsets();
+        Debug.Log("Updating neighbor mine counts for tile at " + transform.position);
 
         foreach (Vector2 offset in offsets)
         {
@@ -154,10 +164,10 @@ public class TileBehavior : MonoBehaviour
             if (neighbor != null)
             {
                 TileBehavior neighborTile = neighbor.GetComponent<TileBehavior>();
-                if (neighborTile != null && !neighborTile.CompareTag("Mine"))
+                if (neighborTile != null)
                 {
                     neighborTile.adjacentMines = Mathf.Max(0, neighborTile.adjacentMines - 1);
-                    // Update text if neighbor is revealed
+                    Debug.Log("Updated neighbor at " + neighborPos + " (Tag: " + neighbor.tag + "): adjacentMines = " + neighborTile.adjacentMines);
                     if (neighborTile.isRevealed && neighborTile.textMesh != null)
                     {
                         neighborTile.textMesh.text = neighborTile.adjacentMines > 0 ? neighborTile.adjacentMines.ToString() : "";

@@ -6,8 +6,8 @@ public class TileBehavior : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
-    private bool isRevealed = false;
-    private bool isFlagged = false;
+    public bool isRevealed = false;
+    public bool isFlagged = false;
 
     public Sprite tileSprite;
     public Sprite revealedSprite;
@@ -87,7 +87,7 @@ public class TileBehavior : MonoBehaviour
         }
     }
 
-    void RevealTile()
+    public void RevealTile()
     {
         spriteRenderer.sprite = revealedSprite;
         if (textMesh != null)

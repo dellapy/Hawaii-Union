@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Obsolete]
 public class TileBehavior : MonoBehaviour
@@ -18,6 +19,9 @@ public class TileBehavior : MonoBehaviour
 
     public int adjacentMines = 0;
 
+    public static bool isGameOver = false;
+    public GameObject gameOverPanel;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -26,12 +30,22 @@ public class TileBehavior : MonoBehaviour
         {
             Debug.LogError("TextMeshPro component not found on " + gameObject.name, gameObject);
         }
+                if (gameOverPanel == null)
+        {
+            Debug.LogError("GameOverPanel not assigned on " + gameObject.name + "; please assign in inspector.", gameObject);
+        }
+        else
+        {
+            gameOverPanel.SetActive(false);
+        }
     }
 
     void OnMouseDown() // Handles left-click
     {
-        if (!isRevealed)
+        if (isGameOver || isRevealed) // Block interaction
         {
+            return;
+        }
             if (isFlagged)
             {
                 if (NeighborsRevealedOrFound())
@@ -65,7 +79,7 @@ public class TileBehavior : MonoBehaviour
                     spriteRenderer.sprite = mineSprite;
                     textMesh.text = ""; // Clear text for mines
                     Debug.Log("Game Over! Mine clicked.");
-                    // Game logic for loss here
+                    GameOver();
                 }
                 else
                 {
@@ -73,18 +87,37 @@ public class TileBehavior : MonoBehaviour
                     Debug.Log("Tile revealed: " + transform.position + ", Adjacent Mines: " + adjacentMines);
                 }
             }
-        }
     }
 
     void OnMouseOver() // Handles right-click
     {
-        if (Input.GetMouseButtonDown(1) && !isRevealed)
+        if (isGameOver || isRevealed) // Block interaction
         {
-            isFlagged = !isFlagged;
-            spriteRenderer.sprite = isFlagged ? flagSprite : tileSprite; // Revert to default sprite if unflagged
-            textMesh.text = ""; // Clear text when flagging/unflagging
-            Debug.Log(isFlagged ? "Tile flagged" : "Tile unflagged");
+            return;
         }
+        if (Input.GetMouseButtonDown(1))
+            {
+                isFlagged = !isFlagged;
+                spriteRenderer.sprite = isFlagged ? flagSprite : tileSprite; // Revert to default sprite if unflagged
+                textMesh.text = ""; // Clear text when flagging/unflagging
+                Debug.Log(isFlagged ? "Tile flagged" : "Tile unflagged");
+            }
+    }
+
+    public void GameOver()
+    {
+        isGameOver = true;
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
+        Debug.Log("Game over state activated: player movement and tile interactions disabled.");
+    }
+
+    public void RestartGame()
+    {
+        isGameOver = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void RevealTile()

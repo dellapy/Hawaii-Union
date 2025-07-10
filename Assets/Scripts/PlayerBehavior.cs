@@ -1,11 +1,16 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
+[System.Obsolete]
 public class PlayerBehavior : MonoBehaviour
 {
     private Vector2 targetPosition;
     private bool canMove = true; // Prevents multiple moves during processing
-    private float moveCooldown = 0.2f; // Small delay to prevent rapid inputs
     private float lastMoveTime;
+
+    [SerializeField] private float moveCooldown = 0.2f; // Small delay to prevent rapid inputs
+    [SerializeField] private float moveDuration = 0.3f; // Time to move between tiles
 
     void Start()
     {
@@ -25,7 +30,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Update()
     {
-        if (!canMove || Time.time < lastMoveTime + moveCooldown)
+        if (TileBehavior.isGameOver || !canMove || Time.time < lastMoveTime + moveCooldown)
             return;
 
         Vector2 moveInput = Vector2.zero;
@@ -63,9 +68,33 @@ public class PlayerBehavior : MonoBehaviour
         // Move the player
         canMove = false;
         targetPosition = newPosition;
-        transform.position = targetPosition;
+        StartCoroutine(MoveToPosition(targetPosition, tile));
         lastMoveTime = Time.time;
         Debug.Log("Player moved to " + targetPosition);
+    }
+
+    private IEnumerator MoveToPosition(Vector2 targetPos, GameObject tile)
+    {
+        Vector2 startPos = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            if (TileBehavior.isGameOver)
+            {
+                canMove = true; // Allow coroutine to exit cleanly
+                yield break;
+            }
+
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / moveDuration);
+            transform.position = Vector2.Lerp(startPos, targetPos, t);
+            yield return null;
+        }
+
+        // Ensure final position is exact
+        transform.position = targetPos;
+        Debug.Log("Player moved to " + targetPos);
 
         // Interact with the tile
         InteractWithTile(tile);
@@ -88,8 +117,11 @@ public class PlayerBehavior : MonoBehaviour
             tileBehavior.isRevealed = true;
             if (tile.CompareTag("Mine"))
             {
-                Debug.Log("Player moved to mine at " + tile.transform.position);
-                // Game over (add game logic)
+                // Game over
+                tileBehavior.GetComponent<SpriteRenderer>().sprite = tileBehavior.mineSprite;
+                tileBehavior.GetComponentInChildren<TextMeshPro>().text = "";
+                Debug.Log("Game Over! Player stepped on a mine at " + tile.transform.position);
+                tileBehavior.GameOver(); // Call GameOver method
             }
             else
             {

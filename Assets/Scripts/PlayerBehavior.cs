@@ -12,19 +12,26 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float moveCooldown = 0.2f; // Small delay to prevent rapid inputs
     [SerializeField] private float moveDuration = 0.3f; // Time to move between tiles
 
+    [SerializeField] private int startX;
+    [SerializeField] private int startY;
+
+    public TextMeshProUGUI adjacentMinesText;
+
     void Start()
     {
         // Initialize player at a starting position
-        targetPosition = new Vector2(0, 0);
+        targetPosition = new Vector2(startX, startY);
         transform.position = targetPosition;
         // Verify that a tile exists at the starting position
-        if (FindTileAtPosition(targetPosition) == null)
+        GameObject startTile = FindTileAtPosition(targetPosition);
+        if (startTile == null)
         {
             Debug.LogError("No tile found at starting position " + targetPosition + "; please adjust the player's initial position.");
         }
         else
         {
             Debug.Log("Player started at " + targetPosition);
+            UpdateAdjacentMinesText(startTile);
         }
     }
 
@@ -99,6 +106,9 @@ public class PlayerBehavior : MonoBehaviour
         // Interact with the tile
         InteractWithTile(tile);
 
+        // Update UI text after moving
+        UpdateAdjacentMinesText(tile);
+
         canMove = true;
     }
 
@@ -109,6 +119,13 @@ public class PlayerBehavior : MonoBehaviour
         {
             Debug.LogError("Tile at " + tile.transform.position + " has no TileBehavior component");
             return;
+        }
+
+        // NPC tiles
+        NPCBehavior npc = FindNPCAtPosition(tile.transform.position);
+        if (npc != null)
+        {
+            npc.Collect(); // Collect the NPC
         }
 
         // If the tile is unrevealed or flagged, reveal it
@@ -132,6 +149,38 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
+        public void UpdateAdjacentMinesText(GameObject tile)
+    {
+        if (adjacentMinesText == null || TileBehavior.isGameOver)
+        {
+            if (adjacentMinesText != null) adjacentMinesText.text = "";
+            return;
+        }
+
+        TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
+        if (tileBehavior == null)
+        {
+            adjacentMinesText.text = "No Tile";
+            return;
+        }
+
+        if (tile.CompareTag("Mine") && !tileBehavior.isRevealed)
+        {
+            adjacentMinesText.text = "Mine"; // Don't reveal mine count until revealed
+        }
+        else
+        {
+            adjacentMinesText.text = "Adjacent Mines: " + tileBehavior.adjacentMines;
+        }
+    }
+
+    public void RefreshAdjacentMinesText()
+    {
+        // Find the tile at the player's current position
+        GameObject currentTile = FindTileAtPosition(transform.position);
+        UpdateAdjacentMinesText(currentTile);
+    }
+
     private GameObject FindTileAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
@@ -150,6 +199,26 @@ public class PlayerBehavior : MonoBehaviour
             }
         }
         Debug.LogWarning("No tile found at " + pos);
+        return null;
+    }
+
+    private NPCBehavior FindNPCAtPosition(Vector2 pos)
+    {
+        pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
+        GameObject[] allNPCs = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allNPCs)
+        {
+            NPCBehavior npc = obj.GetComponent<NPCBehavior>();
+            if (npc != null && obj.activeSelf)
+            {
+                Vector2 npcPos = new Vector2(Mathf.Round(obj.transform.position.x), Mathf.Round(obj.transform.position.y));
+                if (npcPos == pos)
+                {
+                    Debug.Log("Found NPC at " + pos);
+                    return npc;
+                }
+            }
+        }
         return null;
     }
 }

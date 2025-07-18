@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,10 +18,13 @@ public class TileBehavior : MonoBehaviour
 
     private TextMeshPro textMesh;
 
-    public int adjacentMines = 0;
+    [HideInInspector] public int adjacentMines = 0;
 
     public static bool isGameOver = false;
     public GameObject gameOverPanel;
+    public TextMeshProUGUI mineCountText;
+    [HideInInspector] public static int totalMines;
+    [HideInInspector] public static int defusedMines = 0;
 
     void Awake()
     {
@@ -30,7 +34,7 @@ public class TileBehavior : MonoBehaviour
         {
             Debug.LogError("TextMeshPro component not found on " + gameObject.name, gameObject);
         }
-                if (gameOverPanel == null)
+        if (gameOverPanel == null)
         {
             Debug.LogError("GameOverPanel not assigned on " + gameObject.name + "; please assign in inspector.", gameObject);
         }
@@ -38,6 +42,35 @@ public class TileBehavior : MonoBehaviour
         {
             gameOverPanel.SetActive(false);
         }
+        if (mineCountText == null)
+        {
+            Debug.LogError("MineCountText not assigned on " + gameObject.name + "; please assign in inspector.", gameObject);
+        }
+
+        CalculateAdjacentMines();
+        if (gameObject.CompareTag("Mine"))
+        {
+            totalMines++;
+        }
+        UpdateMineCountText();
+    }
+
+    private void CalculateAdjacentMines()
+    {
+        adjacentMines = 0;
+        Vector2[] offsets = DefineNeighborOffsets();
+        Vector2 currentPos = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+
+        foreach (Vector2 offset in offsets)
+        {
+            Vector2 neighborPos = currentPos + offset;
+            GameObject neighbor = FindTileAtPosition(neighborPos);
+            if (neighbor != null && neighbor.CompareTag("Mine"))
+            {
+                adjacentMines++;
+            }
+        }
+        Debug.Log($"Tile at {currentPos} has {adjacentMines} adjacent mines.");
     }
 
     void OnMouseDown() // Handles left-click
@@ -57,6 +90,8 @@ public class TileBehavior : MonoBehaviour
                     {
                         // Defuse mine
                         gameObject.tag = "Untagged";
+                        defusedMines++;
+                        UpdateMineCountText();
                         UpdateNeighborMineCounts();
                         Debug.Log("Mine removed at " + transform.position);
                     }
@@ -80,6 +115,7 @@ public class TileBehavior : MonoBehaviour
                     textMesh.text = ""; // Clear text for mines
                     Debug.Log("Game Over! Mine clicked.");
                     GameOver();
+                    UpdateMineCountText();
                 }
                 else
                 {
@@ -117,6 +153,8 @@ public class TileBehavior : MonoBehaviour
     public void RestartGame()
     {
         isGameOver = false;
+        totalMines = 0;
+        defusedMines = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -127,6 +165,16 @@ public class TileBehavior : MonoBehaviour
         {
             textMesh.text = adjacentMines > 0 ? adjacentMines.ToString() : ""; // Show number if > 0
         }
+    }
+
+        private void UpdateMineCountText()
+    {
+        if (mineCountText == null || isGameOver)
+        {
+            if (mineCountText != null) mineCountText.text = "Game Over";
+            return;
+        }
+        mineCountText.text = $"Defused: {defusedMines}/{totalMines}";
     }
 
     private bool NeighborsRevealedOrFound()
@@ -190,6 +238,8 @@ public class TileBehavior : MonoBehaviour
         Vector2[] offsets = DefineNeighborOffsets();
         Debug.Log("Updating neighbor mine counts for tile at " + transform.position);
 
+        PlayerBehavior player = FindObjectOfType<PlayerBehavior>();
+        Vector2 playerPos = player != null ? new Vector2(Mathf.Round(player.transform.position.x), Mathf.Round(player.transform.position.y)) : Vector2.zero;
         foreach (Vector2 offset in offsets)
         {
             Vector2 neighborPos = new Vector2(transform.position.x, transform.position.y) + offset;
@@ -204,6 +254,11 @@ public class TileBehavior : MonoBehaviour
                     if (neighborTile.isRevealed && neighborTile.textMesh != null)
                     {
                         neighborTile.textMesh.text = neighborTile.adjacentMines > 0 ? neighborTile.adjacentMines.ToString() : "";
+                    }
+
+                    if (player != null && playerPos == neighborPos)
+                    {
+                        player.RefreshAdjacentMinesText();
                     }
                 }
             }

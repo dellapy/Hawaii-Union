@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8063336983625321121}
   - component: {fileID: 3539823183164005791}
   - component: {fileID: 8232666411600680528}
+  - component: {fileID: 6628615051145326850}
   m_Layer: 6
   m_Name: NPC
   m_TagString: Player
@@ -100,3 +101,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65421cbefa020614d915d09f172d12c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6628615051145326850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547037331119325515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46baba212e5c34c49b347d8518492e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  billboardType: 1

@@ -113,4 +113,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46baba212e5c34c49b347d8518492e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  billboardType: 1
+  billboardType: 2

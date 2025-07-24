@@ -4,11 +4,10 @@ public class CameraSwitch : MonoBehaviour
 {
     public Camera topDownCamera;
     public Camera isometricCamera;
-    private bool isTopDown;
+    private bool isTopDown = true;
 
     void Start()
     {
-        isTopDown = true;
         ShowIsometricCamera();   
     }
 

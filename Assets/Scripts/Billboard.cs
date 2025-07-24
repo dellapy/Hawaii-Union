@@ -3,7 +3,7 @@ using UnityEngine;
 public class Billboard : MonoBehaviour
 {
     [SerializeField] private BillboardType billboardType;
-    public enum BillboardType { LookAtCamera, CameraForward };
+    public enum BillboardType { LookAtCamera, CameraForward, Euler };
 
     void LateUpdate()
     {
@@ -14,6 +14,9 @@ public class Billboard : MonoBehaviour
                 break;
             case BillboardType.CameraForward:
                 transform.forward = Camera.main.transform.forward;
+                break;
+            case BillboardType.Euler:
+                transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, 0f, 0f);
                 break;
             default:
                 break;

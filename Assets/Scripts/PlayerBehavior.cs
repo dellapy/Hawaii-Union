@@ -128,6 +128,13 @@ public class PlayerBehavior : MonoBehaviour
             npc.Collect(); // Collect the NPC
         }
 
+        // Grass tiles
+        GrassBehavior grass = FindGrassAtPosition(tile.transform.position);
+        if (grass != null)
+        {
+            grass.Collect(); // Collect the Grass
+        }
+
         // If the tile is unrevealed or flagged, reveal it
         if (!tileBehavior.isRevealed)
         {
@@ -149,7 +156,7 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-        public void UpdateAdjacentMinesText(GameObject tile)
+    public void UpdateAdjacentMinesText(GameObject tile)
     {
         if (adjacentMinesText == null || TileBehavior.isGameOver)
         {
@@ -216,6 +223,26 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     Debug.Log("Found NPC at " + pos);
                     return npc;
+                }
+            }
+        }
+        return null;
+    }
+    
+    private GrassBehavior FindGrassAtPosition(Vector2 pos)
+    {
+        pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
+        GameObject[] allGrass = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allGrass)
+        {
+            GrassBehavior grass = obj.GetComponent<GrassBehavior>();
+            if (grass != null && obj.activeSelf)
+            {
+                Vector2 grassPos = new Vector2(Mathf.Round(obj.transform.position.x), Mathf.Round(obj.transform.position.y));
+                if (grassPos == pos)
+                {
+                    Debug.Log("Found Grass at " + pos);
+                    return grass;
                 }
             }
         }

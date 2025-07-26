@@ -81,25 +81,29 @@ public class TileBehavior : MonoBehaviour
         }
             if (isFlagged)
             {
-                if (NeighborsRevealedOrFound())
+                
+                PlayerEnergy playerEnergy = FindObjectOfType<PlayerBehavior>().GetComponent<PlayerEnergy>();
+                
+                if (NeighborsRevealedOrFound() && playerEnergy.GetEnergy() >= playerEnergy.energyCost)
                 {
                     isFlagged = false;
                     isRevealed = true;
                     RevealTile();
+                    playerEnergy.SubtractEnergy();
                     if (gameObject.CompareTag("Mine"))
-                    {
-                        // Defuse mine
-                        gameObject.tag = "Untagged";
-                        defusedMines++;
-                        UpdateMineCountText();
-                        UpdateNeighborMineCounts();
-                        Debug.Log("Mine removed at " + transform.position);
-                    }
-                    else
-                    {
-                        // False flag: clear flag and reveal
-                        Debug.Log("False flag revealed at " + transform.position + ", Adjacent Mines: " + adjacentMines);
-                    }
+                {
+                    // Defuse mine
+                    gameObject.tag = "Untagged";
+                    defusedMines++;
+                    UpdateMineCountText();
+                    UpdateNeighborMineCounts();
+                    Debug.Log("Mine removed at " + transform.position);
+                }
+                else
+                {
+                    // False flag: clear flag and reveal
+                    Debug.Log("False flag revealed at " + transform.position + ", Adjacent Mines: " + adjacentMines);
+                }
                 }
                 else
                 {
@@ -160,10 +164,13 @@ public class TileBehavior : MonoBehaviour
 
     public void RevealTile()
     {
-        spriteRenderer.sprite = revealedSprite;
-        if (textMesh != null)
+        if (!isFlagged)
         {
-            textMesh.text = adjacentMines > 0 ? adjacentMines.ToString() : ""; // Show number if > 0
+            spriteRenderer.sprite = revealedSprite;
+            if (textMesh != null)
+            {
+                textMesh.text = adjacentMines > 0 ? adjacentMines.ToString() : ""; // Show number if > 0
+            }
         }
     }
 

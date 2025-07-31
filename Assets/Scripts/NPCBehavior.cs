@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[System.Obsolete]
 public class NPCBehavior : MonoBehaviour
 {
     private GameObject occupiedTile;
@@ -38,7 +37,7 @@ public class NPCBehavior : MonoBehaviour
     private GameObject FindTileAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allTiles = GameObject.FindObjectsOfType<GameObject>();
+        GameObject[] allTiles = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject tile in allTiles)
         {
             TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();

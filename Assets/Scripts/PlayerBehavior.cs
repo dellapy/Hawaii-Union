@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [System.Obsolete]
 public class PlayerBehavior : MonoBehaviour
@@ -37,7 +38,7 @@ public class PlayerBehavior : MonoBehaviour
 
     void Update()
     {
-        if (TileBehavior.isGameOver || !canMove || Time.time < lastMoveTime + moveCooldown)
+        if (TileBehavior.isGameOver || TileBehavior.isLevelComplete || !canMove || Time.time < lastMoveTime + moveCooldown)
             return;
 
         Vector2 moveInput = Vector2.zero;
@@ -105,9 +106,17 @@ public class PlayerBehavior : MonoBehaviour
 
         // Interact with the tile
         InteractWithTile(tile);
-
         // Update UI text after moving
         UpdateAdjacentMinesText(tile);
+
+        if (tile.CompareTag("Goal") && tile.GetComponent<TileBehavior>().IsGoalTileUnlocked())
+        {
+            TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
+            if (tileBehavior != null && tileBehavior.IsGoalTileUnlocked())
+            {
+                tileBehavior.LevelComplete();
+            }
+        }
 
         canMove = true;
     }
@@ -136,7 +145,7 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         // If the tile is unrevealed or flagged, reveal it
-        if (!tileBehavior.isRevealed)
+        if (!tileBehavior.isRevealed && !tile.CompareTag("Goal"))
         {
             tileBehavior.isRevealed = true;
             if (tile.CompareTag("Mine"))
@@ -156,9 +165,9 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    public void UpdateAdjacentMinesText(GameObject tile)
+    private void UpdateAdjacentMinesText(GameObject tile)
     {
-        if (adjacentMinesText == null || TileBehavior.isGameOver)
+        if (adjacentMinesText == null || TileBehavior.isGameOver || TileBehavior.isLevelComplete)
         {
             if (adjacentMinesText != null) adjacentMinesText.text = "";
             return;
@@ -171,9 +180,9 @@ public class PlayerBehavior : MonoBehaviour
             return;
         }
 
-        if (tile.CompareTag("Mine") && !tileBehavior.isRevealed)
+        if (tileBehavior.wasFalseFlag)
         {
-            adjacentMinesText.text = "Mine"; // Don't reveal mine count until revealed
+            adjacentMinesText.text = "";
         }
         else
         {

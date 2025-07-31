@@ -280,14 +280,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRevealed: 0
   isFlagged: 0
+  wasFalseFlag: 0
   tileSprite: {fileID: 21300000, guid: 38343c2f0a7de1a409695c7a8b76e98f, type: 3}
   revealedSprite: {fileID: 21300000, guid: ba18ceffbf0faae46be0db9807aa8032, type: 3}
   flagSprite: {fileID: 21300000, guid: 154690a144b58914face145daa704397, type: 3}
-  grassSprite: {fileID: 21300000, guid: b889211d94b6afe4ab4faf813c330b7f, type: 3}
   mineSprite: {fileID: 21300000, guid: d5f9edff925838c45b2e710a04ac1aab, type: 3}
+  goalSprite: {fileID: 21300000, guid: 62ba4fe5a7542f74f8ec2df5dfa8a0be, type: 3}
   adjacentMines: 0
   gameOverPanel: {fileID: 0}
+  levelCompletePanel: {fileID: 0}
   mineCountText: {fileID: 0}
+  requiredMinesToDefuse: 3
 --- !u!61 &865515840922964572
 BoxCollider2D:
   m_ObjectHideFlags: 0

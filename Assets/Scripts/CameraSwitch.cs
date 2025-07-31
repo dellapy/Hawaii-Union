@@ -4,11 +4,19 @@ public class CameraSwitch : MonoBehaviour
 {
     public Camera topDownCamera;
     public Camera isometricCamera;
-    private bool isTopDown = true;
+    private bool isTopDown = false;
 
     void Start()
     {
         ShowIsometricCamera();   
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchPerspective();
+        }
     }
 
     public void SwitchPerspective()

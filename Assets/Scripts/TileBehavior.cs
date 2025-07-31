@@ -2,12 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[System.Obsolete]
 public class TileBehavior : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    public bool isRevealed = false;
-    public bool isFlagged = false;
+    [HideInInspector] public bool isRevealed = false;
+    [HideInInspector] public bool isFlagged = false;
     [HideInInspector] public bool wasFalseFlag = false; // Tracks if tile was revealed as a false flag
 
     public Sprite tileSprite;
@@ -18,14 +17,6 @@ public class TileBehavior : MonoBehaviour
 
     private TextMeshPro textMesh;
     public int adjacentMines = 0; // Only change for debugging
-    public static bool isGameOver = false;
-    public static bool isLevelComplete = false;
-    public GameObject gameOverPanel;
-    public GameObject levelCompletePanel;
-    public TextMeshProUGUI mineCountText;
-    public static int totalMines;
-    public static int defusedMines = 0;
-    [SerializeField] private int requiredMinesToDefuse = 3;
 
     void Awake()
     {
@@ -35,31 +26,13 @@ public class TileBehavior : MonoBehaviour
         {
             Debug.LogError("TextMeshPro component not found on " + gameObject.name, gameObject);
         }
-        if (gameOverPanel == null)
-        {
-            Debug.LogError("GameOverPanel not assigned on " + gameObject.name + "; please assign in inspector.", gameObject);
-        }
-        else
-        {
-            gameOverPanel.SetActive(false);
-        }
-        if (mineCountText == null)
-        {
-            Debug.LogError("MineCountText not assigned on " + gameObject.name + "; please assign in inspector.", gameObject);
-        }
 
         if (gameObject.CompareTag("Goal"))
         {
             spriteRenderer.sprite = goalSprite;
-            isRevealed = true;
         }
 
         CalculateAdjacentMines();
-        if (gameObject.CompareTag("Mine"))
-        {
-            totalMines++;
-        }
-        UpdateMineCountText();
     }
 
     private void CalculateAdjacentMines()
@@ -71,7 +44,7 @@ public class TileBehavior : MonoBehaviour
         foreach (Vector2 offset in offsets)
         {
             Vector2 neighborPos = currentPos + offset;
-            GameObject neighbor = FindTileAtPosition(neighborPos);
+            GameObject neighbor = GridManager.Instance.tileMap.ContainsKey(neighborPos) ? GridManager.Instance.tileMap[neighborPos] : null;
             if (neighbor != null && neighbor.CompareTag("Mine"))
             {
                 adjacentMines++;
@@ -82,13 +55,13 @@ public class TileBehavior : MonoBehaviour
 
     void OnMouseDown() // Handles left-click
     {
-        if (isGameOver || isRevealed) // Block interaction
+        if (GameManager.Instance.isGameOver || isRevealed) // Block interaction
         {
             return;
         }
         if (isFlagged)
         {
-            PlayerEnergy playerEnergy = FindObjectOfType<PlayerBehavior>().GetComponent<PlayerEnergy>();
+            PlayerEnergy playerEnergy = FindFirstObjectByType<PlayerBehavior>().GetComponent<PlayerEnergy>();
             if (NeighborsRevealedOrFound() && playerEnergy.GetEnergy() >= playerEnergy.energyCost)
             {
                 isFlagged = false;
@@ -98,16 +71,10 @@ public class TileBehavior : MonoBehaviour
                 {
                     // Defuse mine
                     gameObject.tag = "Untagged";
-                    defusedMines++;
-                    UpdateMineCountText();
+                    GameManager.Instance.MineDefused();
                     UpdateNeighborMineCounts();
                     RevealTile();
                     Debug.Log("Mine removed at " + transform.position);
-                    // Check if goal tile is unlocked
-                    if (defusedMines >= requiredMinesToDefuse)
-                    {
-                        Debug.Log("Goal tile unlocked!");
-                    }
                 }
                 else
                 {
@@ -119,7 +86,7 @@ public class TileBehavior : MonoBehaviour
             }
             else
             {
-                Debug.Log("Cannot click flagged tile at " + transform.position + ": not all neighbors are revealed or flagged, or insufficient energy.");
+                Debug.Log("Cannot click flagged tile at " + transform.position + ": not all neighbors are revealed, flagged, or a goal space, or insufficient energy.");
             }
         }
         else
@@ -130,8 +97,7 @@ public class TileBehavior : MonoBehaviour
                 spriteRenderer.sprite = mineSprite;
                 textMesh.text = ""; // Clear text for mines
                 Debug.Log("Game Over! Mine clicked.");
-                GameOver();
-                UpdateMineCountText();
+                GameManager.Instance.GameOver();
             }
             else
             {
@@ -143,7 +109,7 @@ public class TileBehavior : MonoBehaviour
 
     void OnMouseOver() // Handles right-click
     {
-        if (isGameOver || isRevealed || CompareTag("Goal")) // Block interaction
+        if (GameManager.Instance.isGameOver || isRevealed || CompareTag("Goal")) // Block interaction
         {
             return;
         }
@@ -156,56 +122,17 @@ public class TileBehavior : MonoBehaviour
         }
     }
 
-    public void GameOver()
-    {
-        isGameOver = true;
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(true);
-        }
-        Debug.Log("Game over state activated: player movement and tile interactions disabled.");
-    }
-
-    public void LevelComplete()
-    {
-        isLevelComplete = true;
-        if (levelCompletePanel != null)
-        {
-            levelCompletePanel.SetActive(true);
-        }
-        Debug.Log("Level complete! Player reached the goal tile.");
-    }
-
-    public void RestartGame()
-    {
-        isGameOver = false;
-        totalMines = 0;
-        defusedMines = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
     public void RevealTile()
     {
-        if (gameObject.CompareTag("Goal"))
+        if (!CompareTag("Goal"))
         {
-            return;
+            spriteRenderer.sprite = revealedSprite;
         }
-        spriteRenderer.sprite = revealedSprite;
         if (textMesh != null)
         {
             // Only show adjacentMines if not a false flag reveal
             textMesh.text = (!wasFalseFlag && adjacentMines > 0) ? adjacentMines.ToString() : "";
         }
-    }
-
-    private void UpdateMineCountText()
-    {
-        if (mineCountText == null || isGameOver)
-        {
-            if (mineCountText != null) mineCountText.text = "Game Over";
-            return;
-        }
-        mineCountText.text = $"Defused: {defusedMines}/{totalMines}";
     }
 
     private bool NeighborsRevealedOrFound()
@@ -216,13 +143,13 @@ public class TileBehavior : MonoBehaviour
         foreach (Vector2 offset in offsets)
         {
             Vector2 neighborPos = new Vector2(transform.position.x, transform.position.y) + offset;
-            GameObject neighbor = FindTileAtPosition(neighborPos);
+            GameObject neighbor = GridManager.Instance.tileMap.ContainsKey(neighborPos) ? GridManager.Instance.tileMap[neighborPos] : null;
             if (neighbor != null)
             {
                 TileBehavior neighborTile = neighbor.GetComponent<TileBehavior>();
                 if (neighborTile != null)
                 {
-                    if (!neighborTile.isRevealed && !neighborTile.isFlagged)
+                    if (!neighborTile.isRevealed && !neighborTile.isFlagged && !neighborTile.CompareTag("Goal"))
                     {
                         Debug.Log("Neighbor at " + neighborPos + " is neither revealed nor flagged.");
                         return false; // Neighbor is neither revealed nor flagged
@@ -243,43 +170,17 @@ public class TileBehavior : MonoBehaviour
         return true;
     }
 
-    public bool IsGoalTileUnlocked()
-    {
-        return defusedMines >= requiredMinesToDefuse;
-    }
-
-    private GameObject FindTileAtPosition(Vector2 pos)
-    {
-        pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allTiles = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject tile in allTiles)
-        {
-            TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
-            if (tileBehavior != null)
-            {
-                Vector2 tilePos = new Vector2(Mathf.Round(tile.transform.position.x), Mathf.Round(tile.transform.position.y));
-                if (tilePos == pos)
-                {
-                    Debug.Log("Found tile at " + pos + " with tag " + tile.tag);
-                    return tile;
-                }
-            }
-        }
-        Debug.LogWarning("No tile found at " + pos);
-        return null;
-    }
-
     private void UpdateNeighborMineCounts()
     {
         Vector2[] offsets = DefineNeighborOffsets();
         Debug.Log("Updating neighbor mine counts for tile at " + transform.position);
 
-        PlayerBehavior player = FindObjectOfType<PlayerBehavior>();
+        PlayerBehavior player = FindFirstObjectByType<PlayerBehavior>();
         Vector2 playerPos = player != null ? new Vector2(Mathf.Round(player.transform.position.x), Mathf.Round(player.transform.position.y)) : Vector2.zero;
         foreach (Vector2 offset in offsets)
         {
             Vector2 neighborPos = new Vector2(transform.position.x, transform.position.y) + offset;
-            GameObject neighbor = FindTileAtPosition(neighborPos);
+            GameObject neighbor = GridManager.Instance.tileMap.ContainsKey(neighborPos) ? GridManager.Instance.tileMap[neighborPos] : null;
             if (neighbor != null)
             {
                 TileBehavior neighborTile = neighbor.GetComponent<TileBehavior>();

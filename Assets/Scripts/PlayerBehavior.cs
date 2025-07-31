@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[System.Obsolete]
 public class PlayerBehavior : MonoBehaviour
 {
     private Vector2 targetPosition;
@@ -32,13 +31,19 @@ public class PlayerBehavior : MonoBehaviour
         else
         {
             Debug.Log("Player started at " + targetPosition);
+            InteractWithTile(startTile);
             UpdateAdjacentMinesText(startTile);
+        }
+
+        if (adjacentMinesText == null)
+        {
+            Debug.LogError("AdjacentMinesText not assigned on PlayerBehavior; please assign in inspector.", gameObject);
         }
     }
 
     void Update()
     {
-        if (TileBehavior.isGameOver || TileBehavior.isLevelComplete || !canMove || Time.time < lastMoveTime + moveCooldown)
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete || !canMove || Time.time < lastMoveTime + moveCooldown)
             return;
 
         Vector2 moveInput = Vector2.zero;
@@ -88,9 +93,9 @@ public class PlayerBehavior : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            if (TileBehavior.isGameOver)
+            if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete)
             {
-                canMove = true; // Allow coroutine to exit cleanly
+                canMove = true;
                 yield break;
             }
 
@@ -104,17 +109,15 @@ public class PlayerBehavior : MonoBehaviour
         transform.position = targetPos;
         Debug.Log("Player moved to " + targetPos);
 
-        // Interact with the tile
         InteractWithTile(tile);
-        // Update UI text after moving
         UpdateAdjacentMinesText(tile);
 
-        if (tile.CompareTag("Goal") && tile.GetComponent<TileBehavior>().IsGoalTileUnlocked())
+        if (tile.CompareTag("Goal"))
         {
             TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
-            if (tileBehavior != null && tileBehavior.IsGoalTileUnlocked())
+            if (tileBehavior != null && GameManager.Instance.IsGoalTileUnlocked())
             {
-                tileBehavior.LevelComplete();
+                GameManager.Instance.LevelComplete();
             }
         }
 
@@ -145,7 +148,7 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         // If the tile is unrevealed or flagged, reveal it
-        if (!tileBehavior.isRevealed && !tile.CompareTag("Goal"))
+        if (!tileBehavior.isRevealed)
         {
             tileBehavior.isRevealed = true;
             if (tile.CompareTag("Mine"))
@@ -154,7 +157,8 @@ public class PlayerBehavior : MonoBehaviour
                 tileBehavior.GetComponent<SpriteRenderer>().sprite = tileBehavior.mineSprite;
                 tileBehavior.GetComponentInChildren<TextMeshPro>().text = "";
                 Debug.Log("Game Over! Player stepped on a mine at " + tile.transform.position);
-                tileBehavior.GameOver(); // Call GameOver method
+                GameManager.Instance.GameOver();
+                UpdateAdjacentMinesText(tile);
             }
             else
             {
@@ -167,7 +171,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void UpdateAdjacentMinesText(GameObject tile)
     {
-        if (adjacentMinesText == null || TileBehavior.isGameOver || TileBehavior.isLevelComplete)
+        if (adjacentMinesText == null || GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete)
         {
             if (adjacentMinesText != null) adjacentMinesText.text = "";
             return;
@@ -192,7 +196,6 @@ public class PlayerBehavior : MonoBehaviour
 
     public void RefreshAdjacentMinesText()
     {
-        // Find the tile at the player's current position
         GameObject currentTile = FindTileAtPosition(transform.position);
         UpdateAdjacentMinesText(currentTile);
     }
@@ -200,19 +203,11 @@ public class PlayerBehavior : MonoBehaviour
     private GameObject FindTileAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allTiles = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject tile in allTiles)
+        if (GridManager.Instance.tileMap.ContainsKey(pos))
         {
-            TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
-            if (tileBehavior != null)
-            {
-                Vector2 tilePos = new Vector2(Mathf.Round(tile.transform.position.x), Mathf.Round(tile.transform.position.y));
-                if (tilePos == pos)
-                {
-                    Debug.Log("Found tile at " + pos + " with tag " + tile.tag);
-                    return tile;
-                }
-            }
+            GameObject tile = GridManager.Instance.tileMap[pos];
+            Debug.Log("Found tile at " + pos + " with tag " + tile.tag);
+            return tile;
         }
         Debug.LogWarning("No tile found at " + pos);
         return null;
@@ -221,19 +216,11 @@ public class PlayerBehavior : MonoBehaviour
     private NPCBehavior FindNPCAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allNPCs = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in allNPCs)
+        if (GridManager.Instance.npcMap.ContainsKey(pos))
         {
-            NPCBehavior npc = obj.GetComponent<NPCBehavior>();
-            if (npc != null && obj.activeSelf)
-            {
-                Vector2 npcPos = new Vector2(Mathf.Round(obj.transform.position.x), Mathf.Round(obj.transform.position.y));
-                if (npcPos == pos)
-                {
-                    Debug.Log("Found NPC at " + pos);
-                    return npc;
-                }
-            }
+            NPCBehavior npc = GridManager.Instance.npcMap[pos];
+            Debug.Log("Found NPC at " + pos);
+            return npc;
         }
         return null;
     }
@@ -241,19 +228,11 @@ public class PlayerBehavior : MonoBehaviour
     private GrassBehavior FindGrassAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allGrass = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in allGrass)
+        if (GridManager.Instance.grassMap.ContainsKey(pos))
         {
-            GrassBehavior grass = obj.GetComponent<GrassBehavior>();
-            if (grass != null && obj.activeSelf)
-            {
-                Vector2 grassPos = new Vector2(Mathf.Round(obj.transform.position.x), Mathf.Round(obj.transform.position.y));
-                if (grassPos == pos)
-                {
-                    Debug.Log("Found Grass at " + pos);
-                    return grass;
-                }
-            }
+            GrassBehavior grass = GridManager.Instance.grassMap[pos];
+            Debug.Log("Found Grass at " + pos);
+            return grass;
         }
         return null;
     }

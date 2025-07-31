@@ -7,6 +7,7 @@ TagManager:
   - Background
   - Mine
   - Grass
+  - Goal
   layers:
   - Default
   - TransparentFX

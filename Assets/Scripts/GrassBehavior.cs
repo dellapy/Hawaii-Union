@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[System.Obsolete]
 public class GrassBehavior : MonoBehaviour
 {
     private GameObject occupiedTile;
@@ -33,14 +32,14 @@ public class GrassBehavior : MonoBehaviour
         Debug.Log("Grass collected at " + transform.position);
         gameObject.SetActive(false);
 
-        PlayerEnergy playerEnergy = FindObjectOfType<PlayerBehavior>().GetComponent<PlayerEnergy>();
+        PlayerEnergy playerEnergy = FindFirstObjectByType<PlayerBehavior>().GetComponent<PlayerEnergy>();
         playerEnergy.AddEnergy();
     }
 
     private GameObject FindTileAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allTiles = GameObject.FindObjectsOfType<GameObject>();
+        GameObject[] allTiles = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject tile in allTiles)
         {
             TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();

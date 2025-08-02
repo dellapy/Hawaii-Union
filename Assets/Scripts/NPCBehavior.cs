@@ -24,6 +24,14 @@ public class NPCBehavior : MonoBehaviour
             return;
         }
 
+        TileBehavior tileBehavior = occupiedTile.GetComponent<TileBehavior>();
+        if (tileBehavior != null && !tileBehavior.isRevealed)
+        {
+            tileBehavior.isRevealed = true;
+            tileBehavior.RevealTile();
+            Debug.Log($"Tile at {pos} revealed under NPC, Adjacent Mines: {tileBehavior.adjacentMines}");
+        }
+
         Debug.Log("NPC placed at " + pos + " on tile with tag " + occupiedTile.tag);
     }
 

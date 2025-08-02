@@ -59,4 +59,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Unity layout files
-UserSettings/
+UserSettings/Layouts/
+/UserSettings

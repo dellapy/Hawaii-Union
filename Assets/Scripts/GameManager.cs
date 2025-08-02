@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject levelCompletePanel;
     public TextMeshProUGUI mineCountText;
+    public TextMeshProUGUI requireCountText;
     public int totalMines { get; private set; }
     public int defusedMines { get; private set; }
     public bool isGameOver { get; private set; }
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
             }
         }
         UpdateMineCountText();
+        requireCountText.text = $"{requiredMinesToDefuse}";
     }
 
     public void MineDefused()
@@ -116,6 +118,6 @@ public class GameManager : MonoBehaviour
             }
             return;
         }
-        mineCountText.text = $"Defused: {defusedMines}/{totalMines} (Goal: {requiredMinesToDefuse})";
+        mineCountText.text = $"{defusedMines} / {totalMines}";
     }
 }

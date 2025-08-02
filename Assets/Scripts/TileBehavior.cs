@@ -5,18 +5,23 @@ using UnityEngine.SceneManagement;
 public class TileBehavior : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
-    [HideInInspector] public bool isRevealed = false;
     [HideInInspector] public bool isFlagged = false;
-    [HideInInspector] public bool wasFalseFlag = false; // Tracks if tile was revealed as a false flag
+    [HideInInspector] public bool isGrass = false;
+    [HideInInspector] public bool isRevealed = false;
+    [HideInInspector] public bool wasFalseFlag = false;
 
     public Sprite tileSprite;
     public Sprite revealedSprite;
     public Sprite flagSprite;
     public Sprite mineSprite;
     public Sprite goalSprite;
+    public Sprite grassSprite;
 
     private TextMeshPro textMesh;
     public int adjacentMines = 0; // Only change for debugging
+
+    private GameObject flagObject;
+    public float flagOffset = 0.5f;
 
     void Awake()
     {
@@ -30,7 +35,24 @@ public class TileBehavior : MonoBehaviour
         if (gameObject.CompareTag("Goal"))
         {
             spriteRenderer.sprite = goalSprite;
+            isGrass = false;
         }
+        else if (gameObject.CompareTag("Grass"))
+        {
+            spriteRenderer.sprite = grassSprite;
+            isGrass = true;
+        }
+
+        // Flag child object setup
+        flagObject = new GameObject("Flag");
+        flagObject.transform.SetParent(transform);
+        flagObject.transform.localPosition = Vector3.up * flagOffset;
+        SpriteRenderer flagRenderer = flagObject.AddComponent<SpriteRenderer>();
+        flagRenderer.sprite = flagSprite;
+        flagRenderer.sortingOrder = 1;
+        Billboard billboard = flagObject.AddComponent<Billboard>();
+        billboard.billboardType = Billboard.BillboardType.Euler;
+        flagObject.SetActive(false); // Disabled by default
 
         CalculateAdjacentMines();
     }
@@ -59,12 +81,18 @@ public class TileBehavior : MonoBehaviour
         {
             return;
         }
+        if (gameObject.CompareTag("Goal") || gameObject.CompareTag("Grass"))
+        {
+            Debug.Log($"Cannot interact with {gameObject.tag} tile via mouse click.");
+            return;
+        }
         if (isFlagged)
         {
             PlayerEnergy playerEnergy = FindFirstObjectByType<PlayerBehavior>().GetComponent<PlayerEnergy>();
             if (NeighborsRevealedOrFound() && playerEnergy.GetEnergy() >= playerEnergy.energyCost)
             {
                 isFlagged = false;
+                flagObject.SetActive(false);
                 isRevealed = true;
                 playerEnergy.SubtractEnergy();
                 if (gameObject.CompareTag("Mine"))
@@ -89,22 +117,22 @@ public class TileBehavior : MonoBehaviour
                 Debug.Log("Cannot click flagged tile at " + transform.position + ": not all neighbors are revealed, flagged, or a goal space, or insufficient energy.");
             }
         }
-        else
-        {
-            isRevealed = true;
-            if (gameObject.CompareTag("Mine"))
-            {
-                spriteRenderer.sprite = mineSprite;
-                textMesh.text = ""; // Clear text for mines
-                Debug.Log("Game Over! Mine clicked.");
-                GameManager.Instance.GameOver();
-            }
             else
             {
-                RevealTile();
-                Debug.Log("Tile revealed: " + transform.position + ", Adjacent Mines: " + adjacentMines);
+                isRevealed = true;
+                if (gameObject.CompareTag("Mine"))
+                {
+                    spriteRenderer.sprite = mineSprite;
+                    textMesh.text = ""; // Clear text for mines
+                    Debug.Log("Game Over! Mine clicked.");
+                    GameManager.Instance.GameOver();
+                }
+                else
+                {
+                    RevealTile();
+                    Debug.Log("Tile revealed: " + transform.position + ", Adjacent Mines: " + adjacentMines);
+                }
             }
-        }
     }
 
     void OnMouseOver() // Handles right-click
@@ -116,7 +144,7 @@ public class TileBehavior : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             isFlagged = !isFlagged;
-            spriteRenderer.sprite = isFlagged ? flagSprite : tileSprite; // Revert to default sprite if unflagged
+            flagObject.SetActive(isFlagged);
             textMesh.text = ""; // Clear text when flagging/unflagging
             Debug.Log(isFlagged ? "Tile flagged" : "Tile unflagged");
         }
@@ -127,6 +155,18 @@ public class TileBehavior : MonoBehaviour
         if (!CompareTag("Goal"))
         {
             spriteRenderer.sprite = revealedSprite;
+        }
+        flagObject.SetActive(false);
+        if (isGrass)
+        {
+            isGrass = false; // Grass is collected
+            PlayerEnergy playerEnergy = FindFirstObjectByType<PlayerBehavior>().GetComponent<PlayerEnergy>();
+            if (playerEnergy != null)
+            {
+                playerEnergy.AddEnergy();
+                Debug.Log("Grass collected at " + transform.position + ", energy recharged.");
+            }
+            gameObject.tag = "Untagged"; // Revert to normal tile
         }
         if (textMesh != null)
         {
@@ -149,10 +189,10 @@ public class TileBehavior : MonoBehaviour
                 TileBehavior neighborTile = neighbor.GetComponent<TileBehavior>();
                 if (neighborTile != null)
                 {
-                    if (!neighborTile.isRevealed && !neighborTile.isFlagged && !neighborTile.CompareTag("Goal"))
+                    if (!neighborTile.isRevealed && !neighborTile.isFlagged && !neighborTile.CompareTag("Goal") && !neighborTile.isGrass)
                     {
                         Debug.Log("Neighbor at " + neighborPos + " is neither revealed nor flagged.");
-                        return false; // Neighbor is neither revealed nor flagged
+                        return false;
                     }
                     else
                     {
@@ -166,7 +206,7 @@ public class TileBehavior : MonoBehaviour
             }
         }
 
-        Debug.Log("All neighbors at " + transform.position + " are revealed, flagged, or goal.");
+        Debug.Log("All neighbors at " + transform.position + " are revealed, flagged, goal, or grass.");
         return true;
     }
 
@@ -184,7 +224,7 @@ public class TileBehavior : MonoBehaviour
             if (neighbor != null)
             {
                 TileBehavior neighborTile = neighbor.GetComponent<TileBehavior>();
-                if (neighborTile != null)
+                if (neighborTile != null && !neighborTile.CompareTag("Goal") && !neighborTile.CompareTag("Grass"))
                 {
                     neighborTile.adjacentMines = Mathf.Max(0, neighborTile.adjacentMines - 1);
                     Debug.Log("Updated neighbor at " + neighborPos + " (Tag: " + neighbor.tag + "): adjacentMines = " + neighborTile.adjacentMines);

@@ -140,13 +140,6 @@ public class PlayerBehavior : MonoBehaviour
             npc.Collect(); // Collect the NPC
         }
 
-        // Grass tiles
-        GrassBehavior grass = FindGrassAtPosition(tile.transform.position);
-        if (grass != null)
-        {
-            grass.Collect(); // Collect the Grass
-        }
-
         // If the tile is unrevealed or flagged, reveal it
         if (!tileBehavior.isRevealed)
         {
@@ -221,18 +214,6 @@ public class PlayerBehavior : MonoBehaviour
             NPCBehavior npc = GridManager.Instance.npcMap[pos];
             Debug.Log("Found NPC at " + pos);
             return npc;
-        }
-        return null;
-    }
-    
-    private GrassBehavior FindGrassAtPosition(Vector2 pos)
-    {
-        pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        if (GridManager.Instance.grassMap.ContainsKey(pos))
-        {
-            GrassBehavior grass = GridManager.Instance.grassMap[pos];
-            Debug.Log("Found Grass at " + pos);
-            return grass;
         }
         return null;
     }

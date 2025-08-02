@@ -23,13 +23,13 @@ public class PlayerEnergy : MonoBehaviour
     }
     public void AddEnergy()
     {
-        currentEnergy += energyGain;
+        currentEnergy = (currentEnergy + energyGain) <= 100 ? currentEnergy + energyGain : maxEnergy;
         energySlider.value = currentEnergy;
     }
 
     public void SubtractEnergy()
     {
-        currentEnergy -= energyCost;
+        currentEnergy = (currentEnergy - energyCost) > 0 ? currentEnergy - energyCost : 0;
         energySlider.value = currentEnergy;
     }
 

@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    [SerializeField] private BillboardType billboardType;
-    public enum BillboardType { LookAtCamera, CameraForward, Euler };
+    public enum BillboardType
+    {
+        LookAtCamera,
+        CameraForward,
+        Euler
+    }
+
+    public BillboardType billboardType;
 
     void LateUpdate()
     {

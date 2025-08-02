@@ -278,19 +278,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c954cf144158b0d4ca74a9c391ab023c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRevealed: 0
   isFlagged: 0
+  isGrass: 0
+  isRevealed: 0
   wasFalseFlag: 0
   tileSprite: {fileID: 21300000, guid: 38343c2f0a7de1a409695c7a8b76e98f, type: 3}
   revealedSprite: {fileID: 21300000, guid: ba18ceffbf0faae46be0db9807aa8032, type: 3}
-  flagSprite: {fileID: 21300000, guid: 154690a144b58914face145daa704397, type: 3}
+  flagSprite: {fileID: 21300000, guid: d8c7c6c90e9571e448e79bffae4a0f14, type: 3}
   mineSprite: {fileID: 21300000, guid: d5f9edff925838c45b2e710a04ac1aab, type: 3}
   goalSprite: {fileID: 21300000, guid: 62ba4fe5a7542f74f8ec2df5dfa8a0be, type: 3}
+  grassSprite: {fileID: 21300000, guid: e3cc49f7ac722be4cbec162f76da56c7, type: 3}
   adjacentMines: 0
-  gameOverPanel: {fileID: 0}
-  levelCompletePanel: {fileID: 0}
-  mineCountText: {fileID: 0}
-  requiredMinesToDefuse: 3
 --- !u!61 &865515840922964572
 BoxCollider2D:
   m_ObjectHideFlags: 0

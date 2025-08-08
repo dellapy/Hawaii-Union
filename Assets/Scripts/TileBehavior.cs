@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TileBehavior : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public class TileBehavior : MonoBehaviour
     public Sprite mineSprite;
     public Sprite goalSprite;
     public Sprite grassSprite;
+    public Sprite highlightSprite;
 
     private TextMeshPro textMesh;
     public int adjacentMines = 0; // Only change for debugging
@@ -31,7 +31,12 @@ public class TileBehavior : MonoBehaviour
         {
             Debug.LogError("TextMeshPro component not found on " + gameObject.name, gameObject);
         }
-
+        
+        if (!GetComponent<Collider2D>())
+        {
+            BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
+            collider.size = new Vector2(1f, 1f);
+        }
         if (gameObject.CompareTag("Goal"))
         {
             spriteRenderer.sprite = goalSprite;
@@ -57,6 +62,11 @@ public class TileBehavior : MonoBehaviour
         CalculateAdjacentMines();
     }
 
+    public void SetHighlight(bool highlight)
+    {
+        spriteRenderer.sprite = highlightSprite;
+    }
+
     private void CalculateAdjacentMines()
     {
         adjacentMines = 0;
@@ -75,7 +85,7 @@ public class TileBehavior : MonoBehaviour
         Debug.Log($"Tile at {currentPos} has {adjacentMines} adjacent mines.");
     }
 
-    void OnMouseDown() // Handles left-click
+        void OnMouseDown() // Handles left-click
     {
         if (GameManager.Instance.isGameOver || isRevealed) // Block interaction
         {
@@ -150,6 +160,7 @@ public class TileBehavior : MonoBehaviour
         }
     }
 
+
     public void RevealTile()
     {
         if (!CompareTag("Goal"))
@@ -175,7 +186,7 @@ public class TileBehavior : MonoBehaviour
         }
     }
 
-    private bool NeighborsRevealedOrFound()
+    public bool NeighborsRevealedOrFound()
     {
         Vector2[] offsets = DefineNeighborOffsets();
         Debug.Log("Checking neighbors for tile at " + transform.position);
@@ -210,7 +221,7 @@ public class TileBehavior : MonoBehaviour
         return true;
     }
 
-    private void UpdateNeighborMineCounts()
+    public void UpdateNeighborMineCounts()
     {
         Vector2[] offsets = DefineNeighborOffsets();
         Debug.Log("Updating neighbor mine counts for tile at " + transform.position);
@@ -252,5 +263,15 @@ public class TileBehavior : MonoBehaviour
             new Vector2(-1, -1), new Vector2(1, -1)
         };
         return offsets;
+    }
+    
+    public TextMeshPro GetTextMesh()
+    {
+        return textMesh;
+    }
+
+    public GameObject GetFlagObject()
+    {
+        return flagObject;
     }
 }

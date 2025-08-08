@@ -1,7 +1,7 @@
+    using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -16,6 +16,27 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private int startY;
 
     public TextMeshProUGUI adjacentMinesText;
+
+    private PlayerControls playerControls;
+    private Vector2 moveInput;
+
+    public GameObject finishLevelButton;
+
+    void Awake()
+    {
+        playerControls = new PlayerControls();
+        
+    }
+
+    void OnEnable()
+    {
+        playerControls.GameControls.Enable();
+    }
+
+    void OnDisable()
+    {
+        playerControls.GameControls.Disable();
+    }
 
     void Start()
     {
@@ -39,33 +60,18 @@ public class PlayerBehavior : MonoBehaviour
         {
             Debug.LogError("AdjacentMinesText not assigned on PlayerBehavior; please assign in inspector.", gameObject);
         }
-    }
 
-    void Update()
-    {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete || !canMove || Time.time < lastMoveTime + moveCooldown)
-            return;
-
-        Vector2 moveInput = Vector2.zero;
-
-        // Handle input (WASD or arrow keys)
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            moveInput = Vector2.up;
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            moveInput = Vector2.down;
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-            moveInput = Vector2.left;
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-            moveInput = Vector2.right;
-
-        if (moveInput != Vector2.zero)
-        {
-            TryMove(moveInput);
-        }
+        playerControls.GameControls.MoveUp.performed += _ => TryMove(Vector2.up);
+        playerControls.GameControls.MoveDown.performed += _ => TryMove(Vector2.down);
+        playerControls.GameControls.MoveLeft.performed += _ => TryMove(Vector2.left);
+        playerControls.GameControls.MoveRight.performed += _ => TryMove(Vector2.right);
     }
 
     private void TryMove(Vector2 direction)
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete || !canMove || Time.time < lastMoveTime + moveCooldown)
+            return;
+        
         Vector2 newPosition = targetPosition + direction;
 
         // Check if there's a tile at the new position
@@ -117,8 +123,12 @@ public class PlayerBehavior : MonoBehaviour
             TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
             if (tileBehavior != null && GameManager.Instance.IsGoalTileUnlocked())
             {
-                GameManager.Instance.LevelComplete();
+                finishLevelButton.SetActive(true);
             }
+        }
+        else
+        {
+            finishLevelButton.SetActive(false);
         }
 
         canMove = true;

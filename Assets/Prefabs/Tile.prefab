@@ -288,7 +288,9 @@ MonoBehaviour:
   mineSprite: {fileID: 21300000, guid: d5f9edff925838c45b2e710a04ac1aab, type: 3}
   goalSprite: {fileID: 21300000, guid: 62ba4fe5a7542f74f8ec2df5dfa8a0be, type: 3}
   grassSprite: {fileID: 21300000, guid: e3cc49f7ac722be4cbec162f76da56c7, type: 3}
+  highlightSprite: {fileID: 0}
   adjacentMines: 0
+  flagOffset: 0.5
 --- !u!61 &865515840922964572
 BoxCollider2D:
   m_ObjectHideFlags: 0

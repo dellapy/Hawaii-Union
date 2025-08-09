@@ -178,7 +178,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Next
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &6859076
@@ -268,6 +268,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -279,6 +283,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -438,7 +458,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Previous
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -504,7 +524,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &17642406
@@ -554,6 +574,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1038113565}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
       objectReference: {fileID: 530031583}
@@ -584,7 +620,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -670,6 +706,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -681,6 +721,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -889,6 +945,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -900,6 +960,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -1201,6 +1277,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -1212,6 +1292,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -1346,6 +1442,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1038113565}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
       objectReference: {fileID: 530031583}
@@ -1376,7 +1488,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -1629,7 +1741,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Close
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1695,7 +1807,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &421035304
@@ -1811,6 +1923,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1331824612}
@@ -1818,6 +1934,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -2097,6 +2229,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fe38a1223087e644d8f5896d1c18e08c, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -2108,6 +2244,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -2406,6 +2558,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -2417,6 +2573,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -2635,6 +2807,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -2646,6 +2822,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -2759,6 +2951,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -2770,6 +2966,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -2801,7 +3013,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -3146,6 +3358,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -3157,6 +3373,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -3180,7 +3412,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 62ba4fe5a7542f74f8ec2df5dfa8a0be, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -3278,6 +3510,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1038113565}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
       objectReference: {fileID: 530031583}
@@ -3308,7 +3556,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -3612,6 +3860,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1331824612}
@@ -3619,6 +3871,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -3746,6 +4014,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -3757,6 +4029,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -3870,6 +4158,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -3881,6 +4173,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -4003,6 +4311,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -4014,6 +4326,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -4040,7 +4368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3039825762846663119, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_TagString
-      value: Mine
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
@@ -4410,6 +4738,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1038113565}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
       objectReference: {fileID: 530031583}
@@ -4440,7 +4784,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -4531,6 +4875,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -4542,6 +4890,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -4894,6 +5258,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -4905,6 +5273,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -5084,6 +5468,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1331824612}
@@ -5091,6 +5479,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -5216,6 +5620,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1038113565}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
       objectReference: {fileID: 530031583}
@@ -5246,7 +5666,7 @@ PrefabInstance:
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+      objectReference: {fileID: 21300000, guid: 251a7b70f144f4d4e820265df3089853, type: 3}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_SortingLayer
       value: -1
@@ -5511,6 +5931,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -5522,6 +5946,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -5545,6 +5985,10 @@ PrefabInstance:
     - target: {fileID: 3039825762846663119, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3039825762846663119, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: m_TagString
+      value: Mine
       objectReference: {fileID: 0}
     - target: {fileID: 5806020868317754099, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: m_Sprite
@@ -5763,6 +6207,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -5774,6 +6222,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -5892,6 +6356,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: grassSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: adjacentMines
       value: 0
       objectReference: {fileID: 0}
@@ -5903,6 +6371,22 @@ PrefabInstance:
       propertyPath: mineCountText
       value: 
       objectReference: {fileID: 1038113565}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc91dfa72db22014cafd611c0d4825bd, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed1Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 67867cc95f3acf74190f79373e1524ad, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed2Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad975b85dec93e54d89eebade56b09ac, type: 3}
+    - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
+      propertyPath: revealed3Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
     - target: {fileID: -8292440801767719652, guid: d4b46de029bac644e9addada2d830ca5, type: 3}
       propertyPath: levelCompletePanel
       value: 
@@ -6226,6 +6710,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 715574432105551499, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 715574432105551499, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 10d08940829f16447acd6ee6a010ef6e, type: 2}
+    - target: {fileID: 715574432105551499, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4494117002455867518, guid: 10d08940829f16447acd6ee6a010ef6e, type: 2}
+    - target: {fileID: 715574432105551499, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 715574432105551499, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065260670645778002, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontSize
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065260670645778002, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f09bd3596f0d0bf46988abed5e614316, type: 2}
+    - target: {fileID: 1065260670645778002, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6733481417334566265, guid: f09bd3596f0d0bf46988abed5e614316, type: 2}
+    - target: {fileID: 1065260670645778002, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065260670645778002, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1680623868721297265, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -6234,10 +6758,54 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1704212650705206902, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284349400673003886, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_margin.z
+      value: -4.228344
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284349400673003886, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 10d08940829f16447acd6ee6a010ef6e, type: 2}
+    - target: {fileID: 2284349400673003886, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4494117002455867518, guid: 10d08940829f16447acd6ee6a010ef6e, type: 2}
+    - target: {fileID: 2284349400673003886, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3230543927577115503, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 218924487}
+    - target: {fileID: 4613193976600787868, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613193976600787868, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
+    - target: {fileID: 4613193976600787868, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5650535350621869143, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
+    - target: {fileID: 4613193976600787868, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613193976600787868, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258126509225293885, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6072718404325754928, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -6322,9 +6890,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 218924487}
+    - target: {fileID: 7330460542967292340, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 177.67436
+      objectReference: {fileID: 0}
     - target: {fileID: 7629547038837328791, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 177.22
+      value: 431.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329650885434944416, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
+    - target: {fileID: 8329650885434944416, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5650535350621869143, guid: 997bcde2e96f0314a92cf87c45660f6f, type: 2}
+    - target: {fileID: 8329650885434944416, guid: 92f9ea19fbc5e354a85c873356d0ee49, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

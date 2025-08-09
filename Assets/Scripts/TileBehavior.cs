@@ -11,13 +11,14 @@ public class TileBehavior : MonoBehaviour
 
     public Sprite tileSprite;
     public Sprite revealedSprite;
+    public Sprite revealed1Sprite;
+    public Sprite revealed2Sprite;
+    public Sprite revealed3Sprite;
     public Sprite flagSprite;
     public Sprite mineSprite;
     public Sprite goalSprite;
     public Sprite grassSprite;
-    public Sprite highlightSprite;
 
-    private TextMeshPro textMesh;
     public int adjacentMines = 0; // Only change for debugging
 
     private GameObject flagObject;
@@ -26,11 +27,6 @@ public class TileBehavior : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        textMesh = GetComponentInChildren<TextMeshPro>();
-        if (textMesh == null)
-        {
-            Debug.LogError("TextMeshPro component not found on " + gameObject.name, gameObject);
-        }
         
         if (!GetComponent<Collider2D>())
         {
@@ -60,11 +56,6 @@ public class TileBehavior : MonoBehaviour
         flagObject.SetActive(false); // Disabled by default
 
         CalculateAdjacentMines();
-    }
-
-    public void SetHighlight(bool highlight)
-    {
-        spriteRenderer.sprite = highlightSprite;
     }
 
     private void CalculateAdjacentMines()
@@ -133,7 +124,6 @@ public class TileBehavior : MonoBehaviour
                 if (gameObject.CompareTag("Mine"))
                 {
                     spriteRenderer.sprite = mineSprite;
-                    textMesh.text = ""; // Clear text for mines
                     Debug.Log("Game Over! Mine clicked.");
                     GameManager.Instance.GameOver();
                 }
@@ -155,7 +145,6 @@ public class TileBehavior : MonoBehaviour
         {
             isFlagged = !isFlagged;
             flagObject.SetActive(isFlagged);
-            textMesh.text = ""; // Clear text when flagging/unflagging
             Debug.Log(isFlagged ? "Tile flagged" : "Tile unflagged");
         }
     }
@@ -165,7 +154,21 @@ public class TileBehavior : MonoBehaviour
     {
         if (!CompareTag("Goal"))
         {
-            spriteRenderer.sprite = revealedSprite;
+            switch (adjacentMines)
+            {
+                case 1:
+                    spriteRenderer.sprite = revealed1Sprite;
+                    break;
+                case 2:
+                    spriteRenderer.sprite = revealed2Sprite;
+                    break;
+                case 3:
+                    spriteRenderer.sprite = revealed3Sprite;
+                    break;
+                default:
+                    spriteRenderer.sprite = revealedSprite;
+                    break;
+            }
         }
         flagObject.SetActive(false);
         if (isGrass)
@@ -178,11 +181,6 @@ public class TileBehavior : MonoBehaviour
                 Debug.Log("Grass collected at " + transform.position + ", energy recharged.");
             }
             gameObject.tag = "Untagged"; // Revert to normal tile
-        }
-        if (textMesh != null)
-        {
-            // Only show adjacentMines if not a false flag reveal
-            textMesh.text = (!wasFalseFlag && adjacentMines > 0) ? adjacentMines.ToString() : "";
         }
     }
 
@@ -239,11 +237,6 @@ public class TileBehavior : MonoBehaviour
                 {
                     neighborTile.adjacentMines = Mathf.Max(0, neighborTile.adjacentMines - 1);
                     Debug.Log("Updated neighbor at " + neighborPos + " (Tag: " + neighbor.tag + "): adjacentMines = " + neighborTile.adjacentMines);
-                    if (neighborTile.isRevealed && neighborTile.textMesh != null)
-                    {
-                        // Update neighbor text, respecting false flag state
-                        neighborTile.textMesh.text = (!neighborTile.wasFalseFlag && neighborTile.adjacentMines > 0) ? neighborTile.adjacentMines.ToString() : "";
-                    }
                     if (player != null && playerPos == neighborPos)
                     {
                         player.RefreshAdjacentMinesText();
@@ -263,11 +256,6 @@ public class TileBehavior : MonoBehaviour
             new Vector2(-1, -1), new Vector2(1, -1)
         };
         return offsets;
-    }
-    
-    public TextMeshPro GetTextMesh()
-    {
-        return textMesh;
     }
 
     public GameObject GetFlagObject()

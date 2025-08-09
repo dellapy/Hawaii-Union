@@ -112,10 +112,6 @@ public class GameManager : MonoBehaviour
     {
         if (mineCountText == null || isGameOver || isLevelComplete)
         {
-            if (mineCountText != null)
-            {
-                mineCountText.text = isGameOver ? "Game Over" : "Level Complete";
-            }
             return;
         }
         mineCountText.text = $"{defusedMines} / {totalMines}";

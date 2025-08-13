@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class TileBehavior : MonoBehaviour
@@ -23,7 +22,7 @@ public class TileBehavior : MonoBehaviour
 
     private GameObject flagObject;
     public float flagOffset = 0.5f;
-
+//
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -94,7 +93,6 @@ public class TileBehavior : MonoBehaviour
             {
                 isFlagged = false;
                 flagObject.SetActive(false);
-                isRevealed = true;
                 playerEnergy.SubtractEnergy();
                 if (gameObject.CompareTag("Mine"))
                 {
@@ -120,7 +118,6 @@ public class TileBehavior : MonoBehaviour
         }
             else
             {
-                isRevealed = true;
                 if (gameObject.CompareTag("Mine"))
                 {
                     spriteRenderer.sprite = mineSprite;
@@ -152,9 +149,39 @@ public class TileBehavior : MonoBehaviour
 
     public void RevealTile()
     {
+        if (isGrass)
+        {
+            PlayerEnergy playerEnergy = FindFirstObjectByType<PlayerBehavior>().GetComponent<PlayerEnergy>();
+            if (playerEnergy.currentEnergy == playerEnergy.maxEnergy)
+            {
+                return;
+            }
+            else
+            {
+                isGrass = false; // Grass is collected
+                if (playerEnergy != null)
+                {
+                    playerEnergy.AddEnergy();
+                    Debug.Log("Grass collected at " + transform.position + ", energy recharged.");
+                }
+                gameObject.tag = "Untagged"; // Revert to normal tile
+            }
+        }
         if (!CompareTag("Goal"))
         {
-            switch (adjacentMines)
+            UpdateHintNumberSprite();
+        }
+        isRevealed = true;
+        flagObject.SetActive(false);
+    }
+
+    private void UpdateHintNumberSprite()
+    {
+        if (CompareTag("Mine"))
+        {
+            return;
+        }
+        switch (adjacentMines)
             {
                 case 1:
                     spriteRenderer.sprite = revealed1Sprite;
@@ -169,19 +196,6 @@ public class TileBehavior : MonoBehaviour
                     spriteRenderer.sprite = revealedSprite;
                     break;
             }
-        }
-        flagObject.SetActive(false);
-        if (isGrass)
-        {
-            isGrass = false; // Grass is collected
-            PlayerEnergy playerEnergy = FindFirstObjectByType<PlayerBehavior>().GetComponent<PlayerEnergy>();
-            if (playerEnergy != null)
-            {
-                playerEnergy.AddEnergy();
-                Debug.Log("Grass collected at " + transform.position + ", energy recharged.");
-            }
-            gameObject.tag = "Untagged"; // Revert to normal tile
-        }
     }
 
     public bool NeighborsRevealedOrFound()
@@ -236,6 +250,7 @@ public class TileBehavior : MonoBehaviour
                 if (neighborTile != null && !neighborTile.CompareTag("Goal") && !neighborTile.CompareTag("Grass"))
                 {
                     neighborTile.adjacentMines = Mathf.Max(0, neighborTile.adjacentMines - 1);
+                    neighborTile.UpdateHintNumberSprite();
                     Debug.Log("Updated neighbor at " + neighborPos + " (Tag: " + neighbor.tag + "): adjacentMines = " + neighborTile.adjacentMines);
                     if (player != null && playerPos == neighborPos)
                     {

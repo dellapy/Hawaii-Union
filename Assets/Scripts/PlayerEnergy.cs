@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerEnergy : MonoBehaviour
 {
-    private int currentEnergy;
+    public int currentEnergy;
     public int maxEnergy = 100;
     public int energyCost = 50;
     public int energyGain = 25;

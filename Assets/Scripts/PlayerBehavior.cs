@@ -1,4 +1,3 @@
-    using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -153,12 +152,10 @@ public class PlayerBehavior : MonoBehaviour
         // If the tile is unrevealed or flagged, reveal it
         if (!tileBehavior.isRevealed)
         {
-            tileBehavior.isRevealed = true;
             if (tile.CompareTag("Mine"))
             {
                 // Game over
                 tileBehavior.GetComponent<SpriteRenderer>().sprite = tileBehavior.mineSprite;
-                tileBehavior.GetComponentInChildren<TextMeshPro>().text = "";
                 Debug.Log("Game Over! Player stepped on a mine at " + tile.transform.position);
                 GameManager.Instance.GameOver();
                 UpdateAdjacentMinesText(tile);

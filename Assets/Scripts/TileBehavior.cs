@@ -22,7 +22,7 @@ public class TileBehavior : MonoBehaviour
 
     private GameObject flagObject;
     public float flagOffset = 0.5f;
-//
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -77,7 +77,7 @@ public class TileBehavior : MonoBehaviour
 
         void OnMouseDown() // Handles left-click
     {
-        if (GameManager.Instance.isGameOver || isRevealed) // Block interaction
+        if (GameManager.Instance.isGameOver || DialogueTrigger.Instance.isInDialogue || isRevealed) // Block interaction
         {
             return;
         }

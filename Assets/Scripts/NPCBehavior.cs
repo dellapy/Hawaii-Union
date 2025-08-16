@@ -3,6 +3,16 @@ using UnityEngine;
 public class NPCBehavior : MonoBehaviour
 {
     private GameObject occupiedTile;
+    public enum NPC
+    {
+        Wife,
+        Uncle,
+        Aunt,
+        Cousin,
+        Kid1,
+        Kid2
+    }
+    public NPC familyMember;
 
     void Start()
     {
@@ -37,15 +47,19 @@ public class NPCBehavior : MonoBehaviour
 
     public void Collect()
     {
-        Debug.Log("NPC collected at " + transform.position);
-        gameObject.SetActive(false);
-        // Add other game logic here
+        if (gameObject.activeSelf)
+        {
+            DialogueTrigger dialogueTrigger = GameObject.Find("Managers/Dialogue System").GetComponent<DialogueTrigger>();
+            dialogueTrigger.InteractWithNPC(familyMember);
+            Debug.Log("NPC collected at " + transform.position);
+            gameObject.SetActive(false);
+        }
     }
 
     private GameObject FindTileAtPosition(Vector2 pos)
     {
         pos = new Vector2(Mathf.Round(pos.x), Mathf.Round(pos.y));
-        GameObject[] allTiles = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+        GameObject[] allTiles = FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject tile in allTiles)
         {
             TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class PopupManager : MonoBehaviour
 {
+    public static PopupManager Instance { get; private set; }
+
     [System.Serializable]
     public class PopupPage
     {
@@ -26,6 +28,15 @@ public class PopupManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         // Ensure popup is shown at start
         popupPanel.SetActive(true);
 

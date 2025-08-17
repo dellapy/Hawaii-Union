@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -17,9 +18,8 @@ public class PlayerBehavior : MonoBehaviour
     public TextMeshProUGUI adjacentMinesText;
 
     private PlayerControls playerControls;
-    private Vector2 moveInput;
 
-    public GameObject finishLevelButton;
+    public Button finishLevelButton;
 
     void Awake()
     {
@@ -68,7 +68,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void TryMove(Vector2 direction)
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete || !canMove || Time.time < lastMoveTime + moveCooldown)
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete || DialogueTrigger.Instance.isInDialogue || !canMove || Time.time < lastMoveTime + moveCooldown)
             return;
         
         Vector2 newPosition = targetPosition + direction;
@@ -122,12 +122,12 @@ public class PlayerBehavior : MonoBehaviour
             TileBehavior tileBehavior = tile.GetComponent<TileBehavior>();
             if (tileBehavior != null && GameManager.Instance.IsGoalTileUnlocked())
             {
-                finishLevelButton.SetActive(true);
+                finishLevelButton.gameObject.SetActive(true);
             }
         }
         else
         {
-            finishLevelButton.SetActive(false);
+            finishLevelButton.gameObject.SetActive(false);
         }
 
         canMove = true;

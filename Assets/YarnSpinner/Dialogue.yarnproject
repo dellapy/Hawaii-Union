@@ -1,13 +1,22 @@
 {
   "projectFileVersion": 3,
   "sourceFiles": [
-    "Wife.yarn"
+    "Wife.yarn",
+    "Aunt.yarn",
+    "Cousin.yarn",
+    "Kid1.yarn",
+    "Kid2.yarn",
+    "Uncle.yarn"
   ],
   "excludeFiles": [
     "**/*~/*",
     "./Samples/Yarn Spinner*/*"
   ],
-  "localisation": {},
+  "localisation": {
+    "en": {
+      "assets": "..\\Sounds"
+    }
+  },
   "baseLanguage": "en",
   "compilerOptions": {},
   "definitionsFiles": []

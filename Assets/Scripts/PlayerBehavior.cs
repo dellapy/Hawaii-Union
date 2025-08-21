@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerBehavior : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
     private Vector2 targetPosition;
     private bool canMove = true; // Prevents multiple moves during processing
     private float lastMoveTime;
@@ -21,8 +22,11 @@ public class PlayerBehavior : MonoBehaviour
 
     public Button finishLevelButton;
 
+    public AudioSource moveAudio;
+
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         playerControls = new PlayerControls();
         
     }
@@ -88,6 +92,15 @@ public class PlayerBehavior : MonoBehaviour
         targetPosition = newPosition;
         StartCoroutine(MoveToPosition(targetPosition, tile));
         lastMoveTime = Time.time;
+        if (direction == Vector2.right)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (direction == Vector2.left)
+        {
+            spriteRenderer.flipX = false;
+        }
+        moveAudio.Play();
         Debug.Log("Player moved to " + targetPosition);
     }
 

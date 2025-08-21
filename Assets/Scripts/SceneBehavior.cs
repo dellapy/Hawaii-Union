@@ -12,7 +12,22 @@ public class SceneBehavior : MonoBehaviour
 
     public void enterTutorial()
     {
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene("Tutorial1Scene");
         Debug.Log("Entering tutorial scene...");
+    }
+
+    public void enterMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+        Debug.Log("Entering main menu scene...");
+    }
+
+    public void moveNextScene()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        } 
     }
 }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6623872570328400998}
   - component: {fileID: 5806020868317754099}
   - component: {fileID: -8292440801767719652}
-  - component: {fileID: 865515840922964572}
-  m_Layer: 0
+  - component: {fileID: 997600399786137462}
+  m_Layer: 7
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.2083883, y: 1.3334553, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,20 +112,17 @@ MonoBehaviour:
   revealed3Sprite: {fileID: 21300000, guid: 9a09eb2415ae5ee49b1437ab39b2db25, type: 3}
   flagSprite: {fileID: 21300000, guid: d8c7c6c90e9571e448e79bffae4a0f14, type: 3}
   mineSprite: {fileID: 21300000, guid: c9e121db4af684542b5824a8631d8989, type: 3}
-  goalSprite: {fileID: 21300000, guid: 62ba4fe5a7542f74f8ec2df5dfa8a0be, type: 3}
+  goalSprite: {fileID: 21300000, guid: b9c7bdbf39335e946b0e1162467c7d37, type: 3}
   grassSprite: {fileID: 21300000, guid: d5911b0875d71e24098f89c15abc765d, type: 3}
   adjacentMines: 0
   flagOffset: 0.5
---- !u!61 &865515840922964572
-BoxCollider2D:
+--- !u!65 &997600399786137462
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3039825762846663119}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -134,31 +131,9 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.76285714, y: 1.0057143}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}

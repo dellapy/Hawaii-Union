@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool isLevelComplete { get; private set; }
     [SerializeField] private int requiredMinesToDefuse = 3;
 
+    public AudioSource explosionAudio;
+
     void Awake()
     {
         if (Instance == null)
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
         }
-        UpdateMineCountText();
+        explosionAudio.Play();
         Debug.Log("Game over state activated: player movement and tile interactions disabled.");
     }
 
@@ -95,7 +97,6 @@ public class GameManager : MonoBehaviour
         {
             levelCompletePanel.SetActive(true);
         }
-        UpdateMineCountText();
         Debug.Log("Level complete! Player reached the goal tile.");
     }
 

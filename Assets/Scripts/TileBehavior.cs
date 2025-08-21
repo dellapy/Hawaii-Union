@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TileBehavior : MonoBehaviour
+public class TileBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     private SpriteRenderer spriteRenderer;
     [HideInInspector] public bool isFlagged = false;
@@ -26,10 +27,10 @@ public class TileBehavior : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        if (!GetComponent<Collider2D>())
+
+        if (!GetComponent<Collider>())
         {
-            BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
+            BoxCollider collider = gameObject.AddComponent<BoxCollider>();
             collider.size = new Vector2(1f, 1f);
         }
         if (gameObject.CompareTag("Goal"))
@@ -75,7 +76,31 @@ public class TileBehavior : MonoBehaviour
         Debug.Log($"Tile at {currentPos} has {adjacentMines} adjacent mines.");
     }
 
-        void OnMouseDown() // Handles left-click
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        print($"New Input System: On Mouse Enter called on {this.name}");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        print($"New Input System: On Mouse Exit called on {this.name}");
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            RevealOrDefuse();
+            print("Left button was pressed!");
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            FlagTile();
+            print("Right button was pressed!");
+        }
+    }
+
+    void RevealOrDefuse()
     {
         if (GameManager.Instance.isGameOver || DialogueTrigger.Instance.isInDialogue || isRevealed) // Block interaction
         {
@@ -132,7 +157,7 @@ public class TileBehavior : MonoBehaviour
             }
     }
 
-    void OnMouseOver() // Handles right-click
+    void FlagTile()
     {
         if (GameManager.Instance.isGameOver || isRevealed || CompareTag("Goal")) // Block interaction
         {
@@ -140,10 +165,15 @@ public class TileBehavior : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            isFlagged = !isFlagged;
-            flagObject.SetActive(isFlagged);
-            Debug.Log(isFlagged ? "Tile flagged" : "Tile unflagged");
+            ToggleFlagObject();
         }
+    }
+
+    void ToggleFlagObject()
+    {
+        isFlagged = !isFlagged;
+        flagObject.SetActive(isFlagged);
+        Debug.Log(isFlagged ? "Tile flagged" : "Tile unflagged");
     }
 
 
@@ -170,6 +200,10 @@ public class TileBehavior : MonoBehaviour
         if (!CompareTag("Goal"))
         {
             UpdateHintNumberSprite();
+            if (isFlagged && adjacentMines == 0)
+            {
+                ToggleFlagObject();
+            }
         }
         isRevealed = true;
         flagObject.SetActive(false);
@@ -250,6 +284,10 @@ public class TileBehavior : MonoBehaviour
                 if (neighborTile != null && !neighborTile.CompareTag("Goal") && !neighborTile.CompareTag("Grass"))
                 {
                     neighborTile.adjacentMines = Mathf.Max(0, neighborTile.adjacentMines - 1);
+                    if (isFlagged && adjacentMines == 0)
+                    {
+                        ToggleFlagObject();
+                    }
                     neighborTile.UpdateHintNumberSprite();
                     Debug.Log("Updated neighbor at " + neighborPos + " (Tag: " + neighbor.tag + "): adjacentMines = " + neighborTile.adjacentMines);
                     if (player != null && playerPos == neighborPos)

@@ -100,7 +100,7 @@ public class TileBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
     }
 
-    void RevealOrDefuse()
+    void RevealOrDefuse() // Left Click/Controller Button West
     {
         if (GameManager.Instance.isGameOver || DialogueTrigger.Instance.isInDialogue || isRevealed) // Block interaction
         {
@@ -157,16 +157,14 @@ public class TileBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             }
     }
 
-    void FlagTile()
+    void FlagTile() // Right Click/Controller Button North
     {
         if (GameManager.Instance.isGameOver || isRevealed || CompareTag("Goal")) // Block interaction
         {
             return;
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            ToggleFlagObject();
-        }
+        
+        ToggleFlagObject();
     }
 
     void ToggleFlagObject()

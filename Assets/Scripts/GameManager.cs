@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject gameOverPanel;
     public GameObject levelCompletePanel;
+    public GameObject pausePanel;
     public TextMeshProUGUI mineCountText;
     public TextMeshProUGUI requireCountText;
     public int totalMines { get; private set; }
     public int defusedMines { get; private set; }
     public bool isGameOver { get; private set; }
+    public bool isPaused {  get; private set; }
     public bool isLevelComplete { get; private set; }
     [SerializeField] private int requiredMinesToDefuse = 3;
 
@@ -44,6 +46,14 @@ public class GameManager : MonoBehaviour
         else
         {
             levelCompletePanel.SetActive(false);
+        }
+        if (pausePanel == null)
+        {
+            Debug.LogError("pausePanel not assigned in GameManager; please assign in Inspector.", gameObject);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
         }
         if (mineCountText == null)
         {
@@ -103,10 +113,31 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         isGameOver = false;
+        isPaused = false;
         isLevelComplete = false;
         totalMines = 0;
         defusedMines = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void PauseToggle()
+    {
+        if (pausePanel != null)
+        {
+            if (pausePanel.activeSelf)
+            {
+                Debug.Log("Game unpaused & interactions enabled");
+                isPaused = false;
+                pausePanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Debug.Log("Game paused & interactions disabled");
+                isPaused = true;
+                pausePanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
     }
 
     private void UpdateMineCountText()

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int totalMines { get; private set; }
     public int defusedMines { get; private set; }
     public bool isGameOver { get; private set; }
+    public bool isPaused {  get; private set; }
     public bool isLevelComplete { get; private set; }
     [SerializeField] private int requiredMinesToDefuse = 3;
 
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         isGameOver = false;
+        isPaused = false;
         isLevelComplete = false;
         totalMines = 0;
         defusedMines = 0;
@@ -123,13 +125,15 @@ public class GameManager : MonoBehaviour
         {
             if (pausePanel.activeSelf)
             {
-                Debug.Log("Game unpaused");
+                Debug.Log("Game unpaused & interactions enabled");
+                isPaused = false;
                 pausePanel.SetActive(false);
                 Time.timeScale = 1;
             }
             else
             {
-                Debug.Log("Game paused");
+                Debug.Log("Game paused & interactions disabled");
+                isPaused = true;
                 pausePanel.SetActive(true);
                 Time.timeScale = 0;
             }

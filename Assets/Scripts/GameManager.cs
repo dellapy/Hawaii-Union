@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameObject gameOverPanel;
     public GameObject levelCompletePanel;
+    public GameObject pausePanel;
     public TextMeshProUGUI mineCountText;
     public TextMeshProUGUI requireCountText;
     public int totalMines { get; private set; }
@@ -44,6 +45,14 @@ public class GameManager : MonoBehaviour
         else
         {
             levelCompletePanel.SetActive(false);
+        }
+        if (pausePanel == null)
+        {
+            Debug.LogError("pausePanel not assigned in GameManager; please assign in Inspector.", gameObject);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
         }
         if (mineCountText == null)
         {
@@ -107,6 +116,24 @@ public class GameManager : MonoBehaviour
         totalMines = 0;
         defusedMines = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void PauseToggle()
+    {
+        if (pausePanel != null)
+        {
+            if (pausePanel.activeSelf)
+            {
+                Debug.Log("Game unpaused");
+                pausePanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Debug.Log("Game paused");
+                pausePanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
     }
 
     private void UpdateMineCountText()

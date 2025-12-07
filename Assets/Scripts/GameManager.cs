@@ -113,8 +113,9 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         isGameOver = false;
-        isPaused = false;
         isLevelComplete = false;
+        isPaused = false;
+        Time.timeScale = 1;
         totalMines = 0;
         defusedMines = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

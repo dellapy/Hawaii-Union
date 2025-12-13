@@ -22,6 +22,12 @@ public class SceneBehavior : MonoBehaviour
         Debug.Log("Entering main menu scene...");
     }
 
+    public void enterLevelSelect()
+    {
+        SceneManager.LoadScene("LevelSelectScene");
+        Debug.Log("Entering level select scene...");
+    }
+
     public void moveNextScene()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
@@ -29,5 +35,11 @@ public class SceneBehavior : MonoBehaviour
         {
             SceneManager.LoadScene(nextSceneIndex);
         } 
+    }
+
+    public void enterScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        Debug.Log("Entering " + sceneName + " scene...");
     }
 }

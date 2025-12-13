@@ -162,6 +162,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ConfirmMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0d27df8-bb90-498d-b891-5ba4de633d7d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""1811ab55-23eb-4904-a1c0-76b64c43c076"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -318,6 +336,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""MoveCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87d4e6f7-dff9-4c11-96d0-099c38f6f49b"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConfirmMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11eec13c-fb1d-480c-bb14-a7798b6622d3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5b2525d-08f7-4f8a-b00c-3b68bbcb9b98"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -338,7 +389,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""e5f04575-19f2-4bb8-bbe8-b7df694a2275"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -850,6 +901,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GameControls_FlagTile = m_GameControls.FindAction("FlagTile", throwIfNotFound: true);
         m_GameControls_CursorPosition = m_GameControls.FindAction("CursorPosition", throwIfNotFound: true);
         m_GameControls_MoveCursor = m_GameControls.FindAction("MoveCursor", throwIfNotFound: true);
+        m_GameControls_ConfirmMenu = m_GameControls.FindAction("ConfirmMenu", throwIfNotFound: true);
+        m_GameControls_Pause = m_GameControls.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -951,6 +1004,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControls_FlagTile;
     private readonly InputAction m_GameControls_CursorPosition;
     private readonly InputAction m_GameControls_MoveCursor;
+    private readonly InputAction m_GameControls_ConfirmMenu;
+    private readonly InputAction m_GameControls_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "GameControls".
     /// </summary>
@@ -994,6 +1049,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GameControls/MoveCursor".
         /// </summary>
         public InputAction @MoveCursor => m_Wrapper.m_GameControls_MoveCursor;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControls/ConfirmMenu".
+        /// </summary>
+        public InputAction @ConfirmMenu => m_Wrapper.m_GameControls_ConfirmMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControls/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_GameControls_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1044,6 +1107,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MoveCursor.started += instance.OnMoveCursor;
             @MoveCursor.performed += instance.OnMoveCursor;
             @MoveCursor.canceled += instance.OnMoveCursor;
+            @ConfirmMenu.started += instance.OnConfirmMenu;
+            @ConfirmMenu.performed += instance.OnConfirmMenu;
+            @ConfirmMenu.canceled += instance.OnConfirmMenu;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -1079,6 +1148,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MoveCursor.started -= instance.OnMoveCursor;
             @MoveCursor.performed -= instance.OnMoveCursor;
             @MoveCursor.canceled -= instance.OnMoveCursor;
+            @ConfirmMenu.started -= instance.OnConfirmMenu;
+            @ConfirmMenu.performed -= instance.OnConfirmMenu;
+            @ConfirmMenu.canceled -= instance.OnConfirmMenu;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -1370,6 +1445,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveCursor(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ConfirmMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirmMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

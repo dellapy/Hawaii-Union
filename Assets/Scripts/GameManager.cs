@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int requiredMinesToDefuse = 3;
 
     public AudioSource explosionAudio;
+
+    public InputActionReference pauseAction;
 
     void Awake()
     {
@@ -72,6 +75,14 @@ public class GameManager : MonoBehaviour
         }
         UpdateMineCountText();
         requireCountText.text = $"{requiredMinesToDefuse}";
+    }
+
+    private void Update()
+    {
+        if (pauseAction != null && pauseAction.action.WasPerformedThisFrame() && !isGameOver && !isLevelComplete)
+        {
+            PauseToggle();
+        }
     }
 
     public void MineDefused()

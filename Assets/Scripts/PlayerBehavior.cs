@@ -111,7 +111,7 @@ public class PlayerBehavior : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            if (GameManager.Instance.isGameOver || GameManager.Instance.isPaused || GameManager.Instance.isLevelComplete)
+            if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete)
             {
                 canMove = true;
                 yield break;
@@ -184,7 +184,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void UpdateAdjacentMinesText(GameObject tile)
     {
-        if (adjacentMinesText == null || GameManager.Instance.isGameOver || GameManager.Instance.isPaused || GameManager.Instance.isLevelComplete)
+        if (adjacentMinesText == null || GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete)
         {
             if (adjacentMinesText != null) adjacentMinesText.text = "";
             return;

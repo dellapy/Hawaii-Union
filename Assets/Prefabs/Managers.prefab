@@ -47,10 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverPanel: {fileID: 0}
   levelCompletePanel: {fileID: 0}
+  pausePanel: {fileID: 0}
   mineCountText: {fileID: 0}
   requireCountText: {fileID: 0}
-  requiredMinesToDefuse: 3
+  requiredMinesToDefuse: 2
   explosionAudio: {fileID: 5927880776928790892}
+  pauseAction: {fileID: 8738176678063766319, guid: 21d04aac829acc640af3c5c60d2749c3, type: 3}
 --- !u!82 &5927880776928790892
 AudioSource:
   m_ObjectHideFlags: 0
@@ -61,7 +63,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e907b5ab9294c4d41bc205608bbdc5b6, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: e907b5ab9294c4d41bc205608bbdc5b6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5

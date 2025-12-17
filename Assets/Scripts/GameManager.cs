@@ -1,21 +1,26 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public GameObject gameOverPanel;
     public GameObject levelCompletePanel;
+    public GameObject pausePanel;
     public TextMeshProUGUI mineCountText;
     public TextMeshProUGUI requireCountText;
     public int totalMines { get; private set; }
     public int defusedMines { get; private set; }
     public bool isGameOver { get; private set; }
+    public bool isPaused {  get; private set; }
     public bool isLevelComplete { get; private set; }
     [SerializeField] private int requiredMinesToDefuse = 3;
 
     public AudioSource explosionAudio;
+
+    public InputActionReference pauseAction;
 
     void Awake()
     {
@@ -45,6 +50,14 @@ public class GameManager : MonoBehaviour
         {
             levelCompletePanel.SetActive(false);
         }
+        if (pausePanel == null)
+        {
+            Debug.LogError("pausePanel not assigned in GameManager; please assign in Inspector.", gameObject);
+        }
+        else
+        {
+            pausePanel.SetActive(false);
+        }
         if (mineCountText == null)
         {
             Debug.LogError("MineCountText not assigned in GameManager; please assign in Inspector.", gameObject);
@@ -62,6 +75,14 @@ public class GameManager : MonoBehaviour
         }
         UpdateMineCountText();
         requireCountText.text = $"{requiredMinesToDefuse}";
+    }
+
+    private void Update()
+    {
+        if (pauseAction != null && pauseAction.action.WasPerformedThisFrame() && !isGameOver && !isLevelComplete)
+        {
+            PauseToggle();
+        }
     }
 
     public void MineDefused()
@@ -104,9 +125,31 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = false;
         isLevelComplete = false;
+        isPaused = false;
+        Time.timeScale = 1;
         totalMines = 0;
         defusedMines = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void PauseToggle()
+    {
+        if (pausePanel != null)
+        {
+            if (pausePanel.activeSelf)
+            {
+                Debug.Log("Game unpaused & interactions enabled");
+                isPaused = false;
+                pausePanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Debug.Log("Game paused & interactions disabled");
+                isPaused = true;
+                pausePanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
     }
 
     private void UpdateMineCountText()

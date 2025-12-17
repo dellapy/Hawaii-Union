@@ -102,7 +102,7 @@ public class TileBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void RevealOrDefuse() // Left Click/Controller Button West
     {
-        if (GameManager.Instance.isGameOver || DialogueTrigger.Instance.isInDialogue || isRevealed) // Block interaction
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isPaused || DialogueTrigger.Instance.isInDialogue || isRevealed) // Block interaction
         {
             return;
         }
@@ -159,7 +159,7 @@ public class TileBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void FlagTile() // Right Click/Controller Button North
     {
-        if (GameManager.Instance.isGameOver || isRevealed || CompareTag("Goal")) // Block interaction
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isPaused || isRevealed || CompareTag("Goal")) // Block interaction
         {
             return;
         }

@@ -72,7 +72,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void TryMove(Vector2 direction)
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isLevelComplete || DialogueTrigger.Instance.isInDialogue || !canMove || Time.time < lastMoveTime + moveCooldown)
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isPaused || GameManager.Instance.isLevelComplete || DialogueTrigger.Instance.isInDialogue || !canMove || Time.time < lastMoveTime + moveCooldown)
             return;
         
         Vector2 newPosition = targetPosition + direction;
